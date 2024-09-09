@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Resume | Resume Builder</title>
+</head>
+
+<body>
+    <!-- tool bar -->
+    <div class="tool-bar">
+        <img class="edit" src="icons/pen-fancy.svg" alt="pen-icon">
+        <img class="download" src="icons/download copy.svg" alt="download-icon">
+        <img class="share" src="icons/share-nodes.svg" alt="share-icon">
+    </div>
+
+    <section class="edit-section hidden resume_edit">
+        <h1 class="form-heading edit-heading">Edit Your Resume</h1>
+        <form>
+            <input class="email" type="text" placeholder="Email">
+            <input class="name" type="text" placeholder="Name">
+            <input class="number" type="text" placeholder="Number">
+            <input class="image" type="text" placeholder="Image">
+            <input class="education" type="text" placeholder="Education">
+            <input class="address" type="text" placeholder="Address">
+            <input class="work-experience" type="text" placeholder="Work Experience">
+            <input class="skills" type="text"
+                placeholder="Skills (e.g JavaScnpt,Python,Typescript etc...) <-- Comma Separated!">
+            <input class="profession" type="text" placeholder="Profession">
+            <button type="button" class="changes sub">Save Changes</button>
+        </form>
+    </section>
+
+    <!-- Resume Page -->
+    <main class="resume-page">
+        <header class="header">
+            <img class="resume-image" src="" alt="resume-image">
+            <h1 class="Name">Your name here...</h1>
+            <h2 class="Profession">Full Stack Developer</h2>
+            <div class="line"></div>
+            <div class="header-foot">
+                <div class="email-box">
+                    <img src="icons/envelope copy.svg" alt="email-icon">
+                    <h3 class="Email">Your email here...</h3>
+                </div>
+                <div class="location-box">
+                    <img src="icons/location-dot.svg" alt="location-icon">
+                    <h3 class="Address">Add your address here...</h3>
+                </div>
+                <div class="phone-box">
+                    <img src="icons/phone copy.svg" alt="phone-icon">
+                    <h3 class="Number">Add your number here...</h3>
+                </div>
+            </div>
+        </header>
+        <section class="txt-black">
+
+            <div class="education-box">
+                <h3>Education</h3>
+                <p class="Educaion">
+                    Add your education here...
+                </p>
+            </div>
+
+            <div class="skills-box">
+                <div class="skill-btn-box">
+                    <h3>Skills</h3>
+                    <button>Hide</button>
+                </div>
+                <div class="list">
+
+                </div>
+            </div>
+            <div class="work-exp-box">
+                <h3>Work Experience</h3>
+                <p class="WorkEX">
+                    Add your work experience here...
+                </p>
+            </div>
+
+        </section>
+    </main>
+    <script src="ts/main.js"></script>
+    <script src="ts/resume.js"></script>
+    <script>
+       
+    </script>
+</body>
+
+</html>
