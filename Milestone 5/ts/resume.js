@@ -79,18 +79,51 @@ skillBtnBox.addEventListener('click', function () {
     }
 });
 // download functionality
-download.addEventListener(('click'), function () {
-    var allHtml = document.body.innerHTML;
-    document.body.innerHTML = main.outerHTML;
-    window.print();
-    document.body.innerHTML = allHtml;
+download.addEventListener('click', function () {
+    if (typeof window.print === 'function') {
+        var allHtml = document.body.innerHTML;
+        document.body.innerHTML = main.outerHTML;
+        window.print();
+        document.body.innerHTML = allHtml;
+    }
+    else {
+        var jsPDF_1 = window.jspdf.jsPDF;
+        html2canvas(document.body, { scale: 3 }).then(function (canvas) {
+            var imgData = canvas.toDataURL('image/png');
+            var pdf = new jsPDF_1('p', 'mm', 'a4');
+            var pdfWidth = 210;
+            var imgWidth = pdfWidth;
+            var imgHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
+            pdf.save('page.pdf');
+        });
+    }
 });
 // share functionality
-share.addEventListener(('click'), function () {
-    navigator.share({
-        title: 'Share Your Resume!', text: 'Take a look at my Resume!', url: window.location.href
-    });
+share.addEventListener('click', function () {
+    var searchBarUrl = window.location.href;
+    if (navigator.share) {
+        navigator.share({
+            title: '',
+            text: '',
+            url: searchBarUrl
+        })
+            .then(function () { return console.log('Successfully shared'); })
+            .catch(function (error) { return console.error('Error sharing:', error); });
+    }
+    else {
+        copyToClipboardFunc(searchBarUrl);
+    }
 });
+function copyToClipboardFunc(text) {
+    var tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('Copied to clipboard!');
+}
 nameElement.innerText = storedData.name;
 professionElement.innerText = storedData.profession;
 addressElement.innerText = storedData.address;

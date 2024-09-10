@@ -19,8 +19,6 @@ const download = document.querySelector('.download') as HTMLImageElement;
 const main = document.querySelector('main') as HTMLElement;
 const share = document.querySelector('.share') as HTMLImageElement;
 
-
-
 (document.querySelector('.resume-image') as HTMLImageElement).src = params.get('image') as string
 
 
@@ -112,20 +110,52 @@ skillBtnBox.addEventListener('click', () => {
     }
 });
 
-
 // download functionality
-download.addEventListener(('click'), () => {
-    const allHtml = document.body.innerHTML;
-    document.body.innerHTML = main.outerHTML;
-    window.print();
-    document.body.innerHTML = allHtml;
-})
+download.addEventListener('click', () => {
+    if (typeof window.print === 'function') {
+        const allHtml = document.body.innerHTML;
+        document.body.innerHTML = main.outerHTML;
+        window.print();
+        document.body.innerHTML = allHtml;
+    } else {
+        const { jsPDF } = (window as any).jspdf;
+        html2canvas(document.body, { scale: 3 } as any).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = 210
+            const imgWidth = pdfWidth;
+            const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
+            pdf.save('page.pdf');
+        });
+    }
+});
+
 // share functionality
-share.addEventListener(('click'), () => {
-    navigator.share({
-        title: 'Share Your Resume!', text: 'Take a look at my Resume!', url: window.location.href
-    })
-})
+share.addEventListener('click', () => {
+    const searchBarUrl = window.location.href;
+    if (navigator.share) {
+        navigator.share({
+            title: '',
+            text: '',
+            url: searchBarUrl
+        })
+            .then(() => console.log('Successfully shared'))
+            .catch((error) => console.error('Error sharing:', error));
+    } else {
+        copyToClipboardFunc(searchBarUrl);
+    }
+});
+function copyToClipboardFunc(text: string) {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('Copied to clipboard!');
+}
+
 
 nameElement.innerText = storedData.name
 professionElement.innerText = storedData.profession

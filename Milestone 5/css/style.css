@@ -212,4 +212,7 @@ button:hover {
     header {
         padding-bottom: 0;
     }
+    form{
+        width: 82vw;
+    }
 }

@@ -10,11 +10,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/node": "^20.11.19",
-    "typescript": "^5.5.4"
+    "@types/html2canvas": "^0.5.35",
+    "@types/node": "^20.11.19"
   },
   "description": "",
   "dependencies": {
-    "pdfmake": "^0.2.12"
   }
 }

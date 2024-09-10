@@ -77,7 +77,8 @@ sub.addEventListener('click', function (e) {
         form.style.display = 'none';
         document.querySelector('.sub-form-h1').innerText = 'Resume Link is here!';
         url.classList.remove('hidden');
-       url.href = `https://hackathon-1-resume-builder-ha9k.vercel.app/resume.html?name=${name1.value}&email=${email.value}&education=${education.value}&number=${number.value}&skills=${skills.value}&address=${address.value}&profession=${profession.value}&workEX=${work_experience.value}&image=${image.value}`;
+        console.log('hello');
+        url.href = "https://hackathon-1-resume-builder-ha9k.vercel.app/resume.html?name=".concat(name1.value, "&email=").concat(email.value, "&education=").concat(education.value, "&number=").concat(number.value, "&skills=").concat(skills.value, "&address=").concat(address.value, "&profession=").concat(profession.value, "&workEX=").concat(work_experience.value, "&image=").concat(image.value);
     }
     else {
         localStorage.setItem('userdata', JSON.stringify(userdata));
